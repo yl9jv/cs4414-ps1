@@ -10,5 +10,6 @@ Chrome/29.0.1547.57: The brower that I am using is Chrome version 29.0.1547.57
 
 2. 
 Since Rust is designed to be concurrent, which allows multiple computing simultaneously. Therefore, modifying a global static variable might be unsafe as it might cause a problem with concurrency.
+Another speculation is that since a global variable can be accessed by any other class, in order to make it safe, the programming language is asking the programmer to confirm that this is the modification that the programmer wanted by having him or her put an unsafe block around it.
 
 3. 
