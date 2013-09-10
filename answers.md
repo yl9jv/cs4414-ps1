@@ -11,5 +11,3 @@ Chrome/29.0.1547.57: The brower that I am using is Chrome version 29.0.1547.57
 2. 
 Since Rust is designed to be concurrent, which allows multiple computing simultaneously and use of shared memory. Therefore, modifying a global static variable might be unsafe as it might cause a problem with concurrency.
 
-
-3. 
