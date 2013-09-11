@@ -40,8 +40,8 @@ unsafe fn new_connection_callback(new_conn :net_tcp::TcpNewConnection, _killch: 
 			counter += 1;
 			let mut iter = request_str.split_str_iter("\n");
 			let line = iter.nth(0).get();
-			let path = line.slice_chars(5, line.len() - 9);
-			if path == " " {
+			let path = line.slice_chars(5, line.len() - 10);
+			if path == "" {
                             let response: ~str = ~
                                 "HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n
                                  <doctype !html><html><head><title>Hello, Rust!</title>
@@ -57,16 +57,16 @@ unsafe fn new_connection_callback(new_conn :net_tcp::TcpNewConnection, _killch: 
                         net_tcp::write(&sock, response.as_bytes_with_null_consume());
 			}
 			else {
-			     let filename: ~str = ~"/cs4414-ps1/" + path;
+			     let filename: ~str = ~"/home/student/cs4414-ps1/" + path.trim();
 			     let read_result: Result<@Reader, ~str>;
 			     let output: ~str;
 			     read_result = file_reader(~PosixPath(filename));
 
 			     match read_result {
-				 Err(err) => 
-					output = fmt!("Error reading file: %?", err),
 				 Ok(file) => 
 					output = fmt!("%?", file.read_lines()),
+				 Err(err) => 
+					output = fmt!("Error reading file: %?", err),			  
 			     }
 				 let response: ~str = ~
                                 "HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n
